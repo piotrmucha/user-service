@@ -17,10 +17,13 @@ public class Config extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests()
+        http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/v1/user").permitAll()
                 .antMatchers(HttpMethod.PUT,"/api/v1/user/confirmation/{email}").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/v1/user/confirmation/{email}").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/v1/user/{email}").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/v1/user/{password}").permitAll()
                 .anyRequest().authenticated();
     }
 }
